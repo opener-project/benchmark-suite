@@ -25,24 +25,27 @@ to benchmark.
 Collecting benchmarking data...
 
 Rehearsal ------------------------------------------------------------------
-language-identifier              0.000000   0.030000   1.520000 (  1.532195)
-tokenizer                        0.040000   0.010000  13.390000 (  9.022121)
-pos-tagger                       0.030000   0.010000  26.800000 ( 16.782974)
-polarity-tagger                  0.020000   0.040000   5.840000 (  5.892068)
-opinion-detector                 0.410000   0.480000  32.040000 ( 32.182600)
--------------------------------------------------------- total: 79.590000sec
+language-identifier              0.020000   0.010000   0.820000 (  0.826937)
+tokenizer                        0.010000   0.000000  11.730000 (  7.883226)
+pos-tagger                       0.030000   0.020000  25.650000 ( 15.899966)
+polarity-tagger                  0.020000   0.010000   5.890000 (  5.933914)
+opinion-detector                 0.360000   0.490000  24.940000 ( 25.082237)
+ner                              0.020000   0.020000  26.690000 ( 14.162766)
+-------------------------------------------------------- total: 95.720000sec
 
                                      user     system      total        real
-language-identifier              0.000000   0.030000   0.870000 (  0.873615)
-tokenizer                        0.010000   0.020000  13.350000 (  9.142849)
-pos-tagger                       0.010000   0.030000  26.290000 ( 16.648857)
-polarity-tagger                  0.020000   0.020000   6.460000 (  6.494793)
-opinion-detector                 0.290000   0.550000  27.430000 ( 27.605625)
+language-identifier              0.010000   0.010000   0.720000 (  0.727406)
+tokenizer                        0.000000   0.010000   9.770000 (  6.440044)
+pos-tagger                       0.010000   0.010000  24.040000 ( 14.683523)
+polarity-tagger                  0.000000   0.040000   5.770000 (  5.817504)
+opinion-detector                 0.290000   0.460000  20.590000 ( 20.984984)
+ner                              0.010000   0.020000  25.400000 ( 13.174547)
 
 Time per iteration ---------------------------------------------------------
 
-language-identifier:    0.087sec
-tokenizer:              0.914sec
-pos-tagger:             1.665sec
-polarity-tagger:        0.649sec
-opinion-detector:       2.761sec
+language-identifier:    0.073sec
+tokenizer:              0.644sec
+pos-tagger:             1.468sec
+polarity-tagger:        0.582sec
+opinion-detector:       2.098sec
+ner:                    1.317sec
