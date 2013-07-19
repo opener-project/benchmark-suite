@@ -129,7 +129,7 @@ puts
 timings.each do |timing|
   print "#{timing.label}:".ljust(timing_width, ' ')
 
-  time = (timing.total / iterations).round(3)
+  time = (timing.real / iterations).round(3)
 
   print "#{time}sec"
   puts
