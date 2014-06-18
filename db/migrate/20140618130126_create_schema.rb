@@ -11,8 +11,8 @@ Sequel.migration do
       Integer :warmup
       Integer :runtime
       Integer :iterations
-      Integer :iteration_time
-      Integer :iterations_per_second
+      Float :iteration_time
+      Float :iterations_per_second
 
       # Ruby info
       String :ruby_engine
