@@ -10,11 +10,11 @@ module OpenerBenchmark
     attr_reader :name
 
     ##
-    # @param [String] name
+    # @param [String|Symbol] name
     # @param [Proc] block
     #
     def initialize(name, block)
-      @name   = name
+      @name   = name.to_s
       @block  = block
       @memory = Memory.new
     end
@@ -30,7 +30,8 @@ module OpenerBenchmark
     # Measures the block's execution time, memory usage, etc. The timing
     # returns are returned as an {OpenerBenchmark::Timing} instance.
     #
-    # @param [Mixed] context The context to evaluate the job in.
+    # @param [OpenerBenchmark::Context] context The context to evaluate the
+    #  job in.
     # @param [Numeric] warmup
     # @param [Numeric] runtime
     #
@@ -63,7 +64,7 @@ module OpenerBenchmark
     ##
     # Warms up the system by running the block for N seconds.
     #
-    # @param [Mixed] context
+    # @param [OpenerBenchmark::Context] context
     # @param [Numeric] warmup
     #
     def perform_warmup(context, warmup)
@@ -78,7 +79,7 @@ module OpenerBenchmark
     # Runs the actual benchmark and returns an Array containing the timings for
     # each iteration.
     #
-    # @param [Mixed] context
+    # @param [OpenerBenchmark::Context] context
     # @param [Numeric] runtime
     # @return [Array]
     #

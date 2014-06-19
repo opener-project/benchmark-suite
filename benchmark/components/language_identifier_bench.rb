@@ -12,15 +12,15 @@ benchmark 'language-identifier' do
     @large_review  = 'Hello, this is an even larger review than the one before.'
   end
 
-  bench 'small review' do
-    @identifier.run(@small_review)
+  bench :small_review do |input|
+    @identifier.run(input)
   end
 
-  bench 'medium review' do
-    @identifier.run(@medium_review)
+  bench :medium_review do |input|
+    @identifier.run(input)
   end
 
-  bench 'large review' do
-    @identifier.run(@large_review)
+  bench :large_review do |input|
+    @identifier.run(input)
   end
 end
