@@ -1,6 +1,6 @@
-require_relative '../benchmark_helper'
+require 'benchmark_helper'
 
-benchmark 'language-identifier' do
+OpenerBenchmark.benchmark 'language-identifier' do
   set :version, Opener::LanguageIdentifier::VERSION
   set :language, 'english'
 

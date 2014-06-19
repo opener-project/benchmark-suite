@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'benchmark'
 gem 'sequel'
 gem 'jdbc-sqlite3'
+gem 'slop'
 
 gem 'opener-language-identifier'
 gem 'opener-tokenizer'

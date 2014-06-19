@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'slop'
+
+parser = Slop.new do
+  banner 'Usage: benchmark [FILES] [OPTIONS]'
+  description 'Runs a set of benchmarks'
+
+  on :h, :help, 'Shows this help message' do
+    abort parser.to_s
+  end
+
+  on :p, :path, 'Directory containing benchmarks',
+    :as      => String,
+    :default => File.join(Dir.pwd, 'benchmark')
+
+  run do |opts, args|
+    if args.empty?
+      args = Dir.glob(File.join(opts[:path], '**/*_bench.rb'))
+    end
+
+    $LOAD_PATH.unshift(opts[:path])
+
+    args.each do |file|
+      require(file)
+    end
+
+    OpenerBenchmark.benchmarks.each(&:run)
+  end
+end
+
+parser.parse
