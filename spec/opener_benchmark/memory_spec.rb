@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Opener::Core::Memory do
+describe OpenerBenchmark::Memory do
   before do
     @instance = described_class.new
   end
