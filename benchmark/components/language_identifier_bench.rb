@@ -7,9 +7,9 @@ OpenerBenchmark.benchmark 'language-identifier' do
   setup do
     @identifier = Opener::LanguageIdentifier.new(:kaf => true)
 
-    @small_review  = 'Hello, this is a a review.'
-    @medium_review = 'Hello, this is a somewhat larger review.'
-    @large_review  = 'Hello, this is an even larger review than the one before.'
+    @small_review  = read_fixture('english/small.txt')
+    @medium_review = read_fixture('english/medium.txt')
+    @large_review  = read_fixture('english/large.txt')
   end
 
   bench :small_review do
