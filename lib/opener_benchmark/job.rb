@@ -6,26 +6,17 @@ module OpenerBenchmark
   # @!attribute [r] name
   #  @return [String]
   #
-  # @!attribute [r] warmup
-  #  @return [Fixnum]
-  #
-  # @!attribute [r] runtime
-  #  @return [Fixnum]
-  #
   class Job
-    attr_reader :name, :warmup, :runtime
+    attr_reader :name
 
     ##
     # @param [String] name
-    # @param [Numeric] warmup
-    # @param [Numeric] runtime
+    # @param [Proc] block
     #
-    def initialize(name, warmup, runtime, context)
-      @name    = name
-      @warmup  = warmup
-      @runtime = runtime
-      @memory  = Memory.new
-      @context = context
+    def initialize(name, block)
+      @name   = name
+      @block  = block
+      @memory = Memory.new
     end
 
     ##
@@ -36,17 +27,20 @@ module OpenerBenchmark
     end
 
     ##
-    # Measures the specified block's execution time, memory usage, etc. The
-    # timing returns are returned as an {OpenerBenchmark::Timing} instance.
+    # Measures the block's execution time, memory usage, etc. The timing
+    # returns are returned as an {OpenerBenchmark::Timing} instance.
     #
-    # @param [Proc] block
+    # @param [Mixed] context The context to evaluate the job in.
+    # @param [Numeric] warmup
+    # @param [Numeric] runtime
+    #
     # @return [OpenerBenchmark::Timing]
     #
-    def measure(block)
-      perform_warmup(block)
+    def measure(context, warmup, runtime)
+      perform_warmup(context, warmup)
 
       rss_before = @memory.rss
-      timings    = perform_benchmark(block)
+      timings    = perform_benchmark(context, runtime)
       rss_after  = @memory.rss
       duration   = timings.inject(:+)
 
@@ -69,11 +63,14 @@ module OpenerBenchmark
     ##
     # Warms up the system by running the block for N seconds.
     #
-    def perform_warmup(block)
+    # @param [Mixed] context
+    # @param [Numeric] warmup
+    #
+    def perform_warmup(context, warmup)
       warmup_target = Time.now + warmup
 
       while Time.now < warmup_target
-        call_block(block)
+        context.instance_eval(&@block)
       end
     end
 
@@ -81,28 +78,23 @@ module OpenerBenchmark
     # Runs the actual benchmark and returns an Array containing the timings for
     # each iteration.
     #
+    # @param [Mixed] context
+    # @param [Numeric] runtime
     # @return [Array]
     #
-    def perform_benchmark(block)
+    def perform_benchmark(context, runtime)
       timings    = []
       run_target = Time.now + runtime
 
       while Time.now <= run_target
         start_time = Time.now.to_f
 
-        call_block(block)
+        context.instance_eval(&@block)
 
         timings << Time.now.to_f - start_time
       end
 
       return timings
-    end
-
-    ##
-    # @param [Proc] block
-    #
-    def call_block(block)
-      @context.instance_eval(&block)
     end
   end # Job
 end # OpenerBenchmark

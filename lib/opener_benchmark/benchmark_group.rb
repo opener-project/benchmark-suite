@@ -21,7 +21,7 @@ module OpenerBenchmark
       @cpu        = CPU.new
       @memory     = Memory.new
       @metadata   = base_metadata.merge(metadata)
-      @benchmarks = {}
+      @benchmarks = []
       @setup      = nil
     end
 
@@ -35,10 +35,8 @@ module OpenerBenchmark
 
       context.instance_eval(&@setup) if @setup
 
-      @benchmarks.each do |job_name, block|
-        job = Job.new(job_name, metadata[:warmup], metadata[:runtime], context)
-
-        timing = job.measure(block)
+      @benchmarks.each do |job|
+        timing = job.measure(context, metadata[:warmup], metadata[:runtime])
 
         display_job(job, timing)
 
@@ -69,7 +67,7 @@ module OpenerBenchmark
     # @param [String] name The name of the report.
     #
     def bench(name, &block)
-      @benchmarks[name] = block
+      @benchmarks << Job.new(name, block)
     end
 
     ##
@@ -99,7 +97,7 @@ module OpenerBenchmark
     # @param [OpenerBenchmark::Timing] name description
     #
     def display_job(job, timing)
-      bench_pad = padding(@benchmarks.keys, 3)
+      bench_pad = padding(benchmark_names, 3)
 
       puts job.header % [
         job.name.ljust(bench_pad),
@@ -107,6 +105,13 @@ module OpenerBenchmark
         timing.iterations,
         timing.rounded(:duration)
       ]
+    end
+
+    ##
+    # @return [Array]
+    #
+    def benchmark_names
+      return @benchmark_names ||= @benchmarks.map(&:name)
     end
 
     ##
