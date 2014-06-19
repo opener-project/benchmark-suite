@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'slop'
+require_relative '../config/application'
 
 parser = Slop.new do
   banner 'Usage: benchmark [FILES] [OPTIONS]'
