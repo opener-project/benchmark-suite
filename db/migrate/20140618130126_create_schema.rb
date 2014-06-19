@@ -16,6 +16,12 @@ Sequel.migration do
       Float :iteration_time
       Float :iterations_per_second
 
+      # Input information
+      Integer :words
+      Integer :bytes
+      Integer :characters
+      String  :encoding
+
       # Ruby info
       String :ruby_engine
       String :ruby_platform
