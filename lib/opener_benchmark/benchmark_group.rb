@@ -13,84 +13,45 @@ module OpenerBenchmark
     attr_reader :name, :metadata
 
     ##
-    # The name of the default context.
-    #
-    # @return [String]
-    #
-    DEFAULT_CONTEXT = '_root_'
-
-    ##
     # @param [String] name The name of the benchmark.
     # @param [Hash] metadata Extra metadata to set.
     #
     def initialize(name, metadata = {})
-      @name   = name
-      @cpu    = CPU.new
-      @memory = Memory.new
-
-      @metadata = {
-        :group         => name,
-        :ruby_engine   => RUBY_ENGINE,
-        :ruby_platform => RUBY_PLATFORM,
-        :ruby_version  => RUBY_VERSION,
-        :cpu_name      => @cpu.name,
-        :warmup        => 2,
-        :runtime       => 5
-      }.merge(metadata)
-
+      @name       = name
+      @cpu        = CPU.new
+      @memory     = Memory.new
+      @metadata   = base_metadata.merge(metadata)
       @benchmarks = {}
       @setup      = nil
     end
 
     ##
-    # Runs the benchmark.
+    # Runs the benchmarks.
     #
     def run
       context = BlankSlate.new
 
+      display_header
+
       context.instance_eval(&@setup) if @setup
 
-      bench_pad = padding(@benchmarks.keys, 3)
-      meta_pad  = padding(metadata.keys)
+      @benchmarks.each do |job_name, block|
+        job = Job.new(job_name, metadata[:warmup], metadata[:runtime], context)
 
-      header_dashes = '-' * (79 - metadata[:group].length)
+        timing = job.measure(block)
 
-      puts "#{metadata[:group]} #{header_dashes}"
+        display_job(job, timing)
 
-      metadata.each do |key, value|
-        puts "#{key.to_s.rjust(meta_pad)}: #{value}"
-      end
+        row = metadata.merge(
+          :name                  => job.name,
+          :iterations            => timing.iterations,
+          :iteration_time        => timing.iteration_time,
+          :iterations_per_second => timing.iterations_per_second,
+          :rss_before            => timing.rss_before,
+          :rss_after             => timing.rss_after
+        )
 
-      puts
-
-      @benchmarks.each do |report_name, block|
-        warmup_target = Time.now + metadata[:warmup]
-
-        # Perform a warmup so that e.g. JITs kick in.
-        while Time.now < warmup_target
-          context.instance_eval(&block)
-        end
-
-        run_target = Time.now + metadata[:runtime]
-        timings    = []
-        rss_before = @memory.rss
-
-        while Time.now <= run_target
-          start_time = Time.now.to_f
-
-          context.instance_eval(&block)
-
-          timings << Time.now.to_f - start_time
-        end
-
-        rss_after   = @memory.rss
-
-        duration    = timings.inject(:+)
-        iterations  = timings.length
-        avg_timing  = duration / iterations
-        avg_its_sec = 1 / avg_timing
-
-        puts "#{report_name.ljust(bench_pad)}#{avg_its_sec.round(6)} i/sec - #{iterations} in #{duration.round(6)}"
+        Benchmark.create(row)
       end
     end
 
@@ -122,12 +83,55 @@ module OpenerBenchmark
     end
 
     ##
+    # Displays the header for the current benchmark group.
+    #
+    def display_header
+      meta_pad      = padding(metadata.keys)
+      header_dashes = '-' * (78 - metadata[:group].length)
+
+      puts "#{metadata[:group]} #{header_dashes}"
+    end
+
+    ##
+    # Displays the results of a single job.
+    #
+    # @param [OpenerBenchmark::Job] job
+    # @param [OpenerBenchmark::Timing] name description
+    #
+    def display_job(job, timing)
+      bench_pad = padding(@benchmarks.keys, 3)
+
+      puts job.header % [
+        job.name.ljust(bench_pad),
+        timing.rounded(:iterations_per_second),
+        timing.iterations,
+        timing.rounded(:duration)
+      ]
+    end
+
+    ##
     # @param [Array] values
     # @param [Fixnum] extra
     # @return [Fixnum]
     #
     def padding(values, extra = 0)
       return values.sort_by { |val| val.to_s.length }.last.length + extra
+    end
+
+    ##
+    # @return [Hash]
+    #
+    def base_metadata
+      return {
+        :group            => name,
+        :ruby_engine      => RUBY_ENGINE,
+        :ruby_platform    => RUBY_PLATFORM,
+        :ruby_version     => RUBY_VERSION,
+        :ruby_description => RUBY_DESCRIPTION,
+        :cpu_name         => @cpu.name,
+        :warmup           => 2,
+        :runtime          => 5
+      }
     end
   end # Benchmark
 end # OpenerBenchmark
