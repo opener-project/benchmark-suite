@@ -8,9 +8,11 @@ Sequel.migration do
       String :version
       String :language
 
-      Integer :warmup
-      Integer :runtime
+      Float :warmup
+      Float :runtime
+
       Integer :iterations
+
       Float :iteration_time
       Float :iterations_per_second
 

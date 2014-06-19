@@ -18,10 +18,10 @@ module OpenerBenchmark
   #  @return [Fixnum]
   #
   # @!attribute [r] warmup
-  #  @return [Fixnum]
+  #  @return [Numeric]
   #
   # @!attribute [r] runtime
-  #  @return [Fixnum]
+  #  @return [Numeric]
   #
   # @!attribute [r] duration
   #  @return [Float]
