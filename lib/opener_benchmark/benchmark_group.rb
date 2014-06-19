@@ -138,14 +138,14 @@ module OpenerBenchmark
     #
     def base_metadata
       return {
-        :group            => name,
-        :ruby_engine      => RUBY_ENGINE,
-        :ruby_platform    => RUBY_PLATFORM,
-        :ruby_version     => RUBY_VERSION,
-        :ruby_description => RUBY_DESCRIPTION,
-        :cpu_name         => @cpu.name,
-        :warmup           => 2,
-        :runtime          => 5
+        :group         => name,
+        :ruby_engine   => RUBY_ENGINE,
+        :ruby_platform => RUBY_PLATFORM,
+        :ruby_version  => RUBY_VERSION,
+        :jruby_version => JRUBY_VERSION,
+        :cpu_name      => @cpu.name,
+        :warmup        => 2,
+        :runtime       => 5
       }
     end
   end # Benchmark

@@ -26,7 +26,7 @@ Sequel.migration do
       String :ruby_engine
       String :ruby_platform
       String :ruby_version
-      String :ruby_description
+      String :jruby_version
 
       # System/CPU info
       String :cpu_name
