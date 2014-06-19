@@ -12,15 +12,15 @@ OpenerBenchmark.benchmark 'language-identifier' do
     @large_review  = 'Hello, this is an even larger review than the one before.'
   end
 
-  bench :small_review do |input|
-    @identifier.run(input)
+  bench :small_review do
+    @identifier.run(@small_review)
   end
 
-  bench :medium_review do |input|
-    @identifier.run(input)
+  bench :medium_review do
+    @identifier.run(@medium_review)
   end
 
-  bench :large_review do |input|
-    @identifier.run(input)
+  bench :large_review do
+    @identifier.run(@large_review)
   end
 end
