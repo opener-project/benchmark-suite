@@ -6,6 +6,34 @@ module OpenerBenchmark
     plugin :timestamps, :created => :created_at
 
     ##
+    # Returns a base query used to group rows together per benchmark group,
+    # name, words, etc.
+    #
+    # @return [Mixed]
+    #
+    def self.grouped_base_query
+      return select(
+        :group,
+        :name,
+        :words,
+        :language,
+        :jruby_version,
+        :cpu_name
+      ).group(
+        :group,
+        :name,
+        :words,
+        :language,
+        :jruby_version,
+        :cpu_name
+      ).order(
+        Sequel.asc(:group),
+        Sequel.asc(:language),
+        Sequel.asc(:words)
+      )
+    end
+
+    ##
     # Calculates the average iteration time for a benchmark group and groups
     # the results per name, word amount and language.
     #
@@ -26,11 +54,8 @@ module OpenerBenchmark
     # @return [Enumerable]
     #
     def self.grouped_iteration_times
-      return select { round(avg(:iteration_time), 3).as(:avg) }
-        .select_append { count(:id).as(:samples) }
-        .select_append(:group, :name, :words, :version, :jruby_version, :cpu_name)
-        .group(:group, :name, :words, :version, :jruby_version)
-        .order(:group)
+      return grouped_base_query
+        .select_append { round(avg(:iteration_time), 3).as(:avg) }
     end
 
     ##
@@ -39,11 +64,8 @@ module OpenerBenchmark
     # @return [Enumerable]
     #
     def self.grouped_iterations_per_second
-      return select { round(avg(:iterations_per_second), 3).as(:avg) }
-        .select_append { count(:id).as(:samples) }
-        .select_append(:group, :name, :words, :version, :jruby_version, :cpu_name)
-        .group(:group, :name, :words, :version, :jruby_version)
-        .order(:group)
+      return grouped_base_query
+        .select_append { round(avg(:iterations_per_second), 3).as(:avg) }
     end
 
     ##
@@ -53,11 +75,8 @@ module OpenerBenchmark
     # @return [Enumerable]
     #
     def self.grouped_words_per_second
-      return select { round(avg(words / iteration_time), 3).as(:avg) }
-        .select_append { count(:id).as(:samples) }
-        .select_append(:group, :name, :version, :jruby_version, :cpu_name)
-        .group(:group, :name, :words, :version, :jruby_version)
-        .order(:group)
+      return grouped_base_query
+        .select_append { round(avg(words / iteration_time), 3).as(:avg) }
     end
 
     ##
@@ -69,12 +88,9 @@ module OpenerBenchmark
     def self.grouped_rss
       to_mb = 1048576
 
-      return select { round(avg(:rss_before) / to_mb, 3).as(:rss_before) }
+      return grouped_base_query
+        .select_append { round(avg(:rss_before) / to_mb, 3).as(:rss_before) }
         .select_append { round(avg(:rss_after) / to_mb, 3).as(:rss_after) }
-        .select_append { count(:id).as(:samples) }
-        .select_append(:group, :name, :version, :jruby_version, :cpu_name)
-        .group(:group, :name, :version, :jruby_version)
-        .order(:group)
     end
   end # Benchmark
 end # OpenerBenchmark

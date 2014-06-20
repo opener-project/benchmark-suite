@@ -3,14 +3,13 @@ namespace :report do
   task :iteration_time => :environment do
     rows  = OpenerBenchmark::Benchmark.grouped_iteration_times
     table = Terminal::Table.new do |t|
-      t.headings = %w{Group Version Name Samples Words JRuby CPU Time}
+      t.headings = %w{Group Name Language Words JRuby CPU Time}
 
-      rows.each do |row|
+      rows.each_with_index do |row, index|
         t << [
           row[:group],
-          row[:version],
           row[:name],
-          row[:samples],
+          row[:language],
           row[:words],
           row[:jruby_version],
           row[:cpu_name],
@@ -26,14 +25,13 @@ namespace :report do
   task :iterations_per_second => :environment do
     rows  = OpenerBenchmark::Benchmark.grouped_iterations_per_second
     table = Terminal::Table.new do |t|
-      t.headings = %w{Group Version Name Samples Words JRuby CPU Iterations}
+      t.headings = %w{Group Name Language Words JRuby CPU Iterations}
 
       rows.each do |row|
         t << [
           row[:group],
-          row[:version],
           row[:name],
-          row[:samples],
+          row[:language],
           row[:words],
           row[:jruby_version],
           row[:cpu_name],
@@ -49,14 +47,13 @@ namespace :report do
   task :words_per_second => :environment do
     rows  = OpenerBenchmark::Benchmark.grouped_words_per_second
     table = Terminal::Table.new do |t|
-      t.headings = %w{Group Version Name Samples JRuby CPU Rate}
+      t.headings = %w{Group Name Language JRuby CPU Rate}
 
       rows.each do |row|
         t << [
           row[:group],
-          row[:version],
           row[:name],
-          row[:samples],
+          row[:language],
           row[:jruby_version],
           row[:cpu_name],
           row[:avg]
@@ -71,16 +68,15 @@ namespace :report do
   task :rss => :environment do
     rows  = OpenerBenchmark::Benchmark.grouped_rss
     table = Terminal::Table.new do |t|
-      t.headings = %w{Group Version Name Samples JRuby CPU Before After Delta}
+      t.headings = %w{Group Name Language JRuby CPU Before After Delta}
 
       rows.each do |row|
         delta = (row[:rss_after] - row[:rss_before]).round(3)
 
         t << [
           row[:group],
-          row[:version],
           row[:name],
-          row[:samples],
+          row[:language],
           row[:jruby_version],
           row[:cpu_name],
           row[:rss_before],
