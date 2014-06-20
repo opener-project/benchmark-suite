@@ -1,2 +1,4 @@
 db/database.db
-Gemfile.lock
+plots/*
+
+!.gitkeep

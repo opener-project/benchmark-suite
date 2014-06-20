@@ -1,0 +1,37 @@
+# Plots a histogram that can be used to display the average iteration times
+# per benchmark.
+#
+# The input file for this script should be in the following format:
+#
+#     "Label 1" value1
+#     "Label 2" value2
+#
+# For example:
+#
+#     "small review" 0.05
+#     "medium review" 0.010
+#
+# The following variables have to be set in the CLI:
+#
+# * plot_title: the resulting plot's title
+# * plot_file: path to the data file to plot
+#
+set title plot_title
+
+set ylabel "Time (seconds)"
+set xtics center
+
+set term svg enhanced size 800,600
+set grid
+set yrange [0:*]
+set bmargin 5
+
+# Sets the background color to white.
+set object 1 rectangle from screen 0,0 to screen 1,1 \
+    fillcolor rgb "#ffffff" behind
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid 0.8 border rgb "#475D66"
+
+plot plot_file using 2:xticlabel(1) title "Timings" linecolor rgb "#9CD1E6"

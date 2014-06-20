@@ -1,5 +1,6 @@
 require 'time'
-require 'blankslate'
+require 'tempfile'
+require 'terminal-table'
 
 require 'opener/language_identifier'
 
@@ -11,3 +12,4 @@ require_relative 'opener_benchmark/benchmark_group'
 require_relative 'opener_benchmark/benchmark'
 require_relative 'opener_benchmark/job'
 require_relative 'opener_benchmark/timing'
+require_relative 'opener_benchmark/plot'
