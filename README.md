@@ -19,6 +19,7 @@ for each run, thus the more benchmarks you run the more accurate data becomes
 * JRuby 1.7 or newer (due to some components requiring JRuby)
 * SQLite3
 * Bundler
+* gnuplot (for generating graphs)
 
 ## Installation
 
@@ -33,6 +34,17 @@ Then set up the database:
 You can now run a benchmark:
 
     ./bin/benchmark benchmark/components/language_identifier.rb
+
+For generating graphs you'll need to have [gnuplot](http://www.gnuplot.info/)
+installed. If you're on OS X you can install this as following:
+
+    brew install gnuplot
+
+For the various Linux flavours you can use the following:
+
+    sudo pacman -S gnuplot       # Arch Linux
+    sudo apt-get install gnuplot # Debian/Ubuntu
+    sudo yum install gnuplot     # CentOS/Fedora
 
 ## Writing Benchmarks
 
