@@ -11,9 +11,13 @@ parser = Slop.new do
     abort parser.to_s
   end
 
-  on :p, :path, 'Directory containing benchmarks',
+  on :p=, :path=, 'Directory containing benchmarks',
     :as      => String,
     :default => File.join(Dir.pwd, 'benchmark')
+
+  on :r=, :runs=, 'The amount of times to run all benchmarks',
+    :as      => Integer,
+    :default => 1
 
   run do |opts, args|
     if args.empty?
@@ -26,7 +30,9 @@ parser = Slop.new do
       require(file)
     end
 
-    OpenerBenchmark.benchmarks.each(&:run)
+    opts[:runs].times do
+      OpenerBenchmark.benchmarks.each(&:run)
+    end
   end
 end
 
