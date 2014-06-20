@@ -61,6 +61,8 @@ module OpenerBenchmark
 
         Benchmark.create(row)
       end
+
+      puts
     end
 
     ##
@@ -94,10 +96,12 @@ module OpenerBenchmark
     # Displays the header for the current benchmark group.
     #
     def display_header
-      meta_pad      = padding(metadata.keys)
-      header_dashes = '-' * (78 - metadata[:group].length)
+      meta_pad = padding(metadata.keys)
+      label    = "#{metadata[:group]} (#{metadata[:language]})"
 
-      puts "#{metadata[:group]} #{header_dashes}"
+      header_dashes = '-' * (78 - label.length)
+
+      puts "#{label} #{header_dashes}"
     end
 
     ##
