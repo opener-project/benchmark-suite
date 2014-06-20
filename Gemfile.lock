@@ -11,14 +11,21 @@ GEM
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
+    ffi (1.9.3)
     ffi (1.9.3-java)
     httpclient (2.4.0)
     jamespath (0.5.0)
     jdbc-sqlite3 (3.7.2.1)
+    json (1.8.1)
     json (1.8.1-java)
+    mini_portile (0.6.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     nokogiri (1.6.2.1-java)
+    opener-core (1.0.2)
+      nokogiri
     opener-daemons (1.1.1)
       aws-sdk-core (>= 2.0.0.rc1, < 3)
       dotenv
@@ -32,17 +39,22 @@ GEM
       puma
       sinatra (~> 1.4.2)
       uuidtools
-    opener-tokenizer (0.4.4)
+    opener-tokenizer (1.1.2)
       httpclient
       nokogiri
+      opener-core (>= 1.0.2)
+      opener-daemons
       opener-tokenizer-base (>= 0.3.1)
       opener-webservice
+      puma
       sinatra (~> 1.4.2)
-    opener-tokenizer-base (0.4.1)
+    opener-tokenizer-base (1.0.0)
     opener-webservice (1.0.1)
       json
       sinatra (~> 1.4.3)
       uuidtools
+    puma (2.8.2)
+      rack (>= 1.1, < 2.0)
     puma (2.8.2-java)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
@@ -78,8 +90,8 @@ PLATFORMS
 
 DEPENDENCIES
   jdbc-sqlite3
-  opener-language-identifier
-  opener-tokenizer
+  opener-language-identifier (~> 3.0)
+  opener-tokenizer (~> 1.0)
   rake
   rspec
   sequel

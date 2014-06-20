@@ -5,8 +5,8 @@ gem 'jdbc-sqlite3'
 gem 'slop'
 gem 'terminal-table'
 
-gem 'opener-language-identifier'
-gem 'opener-tokenizer'
+gem 'opener-language-identifier', '~> 3.0'
+gem 'opener-tokenizer', '~> 1.0'
 
 group :development do
   gem 'rspec'
