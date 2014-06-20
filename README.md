@@ -126,3 +126,25 @@ case). As a result extra metadata will be added based on the value of
 
 If the benchmark name does *not* match a variable then said metadata is not
 added. The benchmark however will still run just fine.
+
+## Generating Reports
+
+To generate a plain text report of the benchmarking data you can use the Rake
+tasks defines in the `report` namespace. For example,
+`rake report:iteration_time` will present average iteration times grouped per
+benchmarking group/names.
+
+For more information run `rake -T`.
+
+## Generating Graphs
+
+Generating graphs is done using a set of Rake tasks and standalone gnuplot
+scripts. These Rake tasks are defined in the `plot` namespace. For example, to
+generate a graph of the average iteration times for a benchmark group you can
+run the following:
+
+    rake plot:iteration_time[language-identifier]
+
+The resulting graph is saved as an SVG file in the `plots/` directory. If you
+don't have a dedicated SVG viewer you can usually open SVG files in your web
+browser (e.g. Chrome/Chromium).
