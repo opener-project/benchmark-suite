@@ -3,13 +3,18 @@
 #
 # The input file for this script should be in the following format:
 #
+#     "language"
 #     "Label 1" value1
 #     "Label 2" value2
 #
 # For example:
 #
+#     "english"
 #     "small review" 0.05
 #     "medium review" 0.010
+#
+# This file makes the hard assumption that there's a data index for all 5
+# languages. It will fail if this isn't the case.
 #
 # The following variables have to be set in the CLI:
 #
@@ -31,7 +36,21 @@ set object 1 rectangle from screen 0,0 to screen 1,1 \
     fillcolor rgb "#ffffff" behind
 
 set style data histogram
-set style histogram cluster gap 1
-set style fill solid 0.8 border rgb "#475D66"
 
-plot plot_file using 2:xticlabel(1) title "Timings" linecolor rgb "#9CD1E6"
+# Add spacing between each cluster of bars.
+set style histogram cluster gap 1
+
+# Add a bit of spacing between each bar.
+set boxwidth 0.8 relative
+
+set style line 1 linecolor rgb "#BFBFBF" # Gray
+set style line 2 linecolor rgb "#fbca04" # Yellow
+set style line 3 linecolor rgb "#bfe5bf" # Green
+set style line 4 linecolor rgb "#e11d21" # Red
+set style line 5 linecolor rgb "#eb6420" # Orange
+set style line 6 linecolor rgb "#207de5" # Dark blue
+
+# 80% opacity with a black (-1) border.
+set style fill solid 0.8 border -1
+
+plot for [i=0:5] plot_file index i using 2:xticlabel(1) title column ls i+1

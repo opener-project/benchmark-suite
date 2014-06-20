@@ -12,9 +12,20 @@ namespace :plot do
 
     db_rows = OpenerBenchmark::Benchmark.group_iteration_times(args[:group])
     rows    = []
+    grouped = Hash.new { |hash, key| hash[key] = [] }
 
     db_rows.each do |row|
-      rows << %Q{"#{plot.label_for(row)}" #{row[:avg]}}
+      grouped[row[:language].capitalize] << row
+    end
+
+    grouped.each do |language, values|
+      rows << %Q{"#{language}"}
+
+      values.each do |val|
+        rows << %Q{"#{plot.label_for(val)}" #{val[:avg]}}
+      end
+
+      rows << "\n"
     end
 
     plot.plot(rows)

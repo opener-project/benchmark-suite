@@ -35,7 +35,7 @@ module OpenerBenchmark
     #
     # @return [String]
     #
-    GNUPLOT_COMMAND = %q(gnuplot -e 'plot_file="%s"' -e 'plot_title="%s"' %s > %s)
+    GNUPLOT_COMMAND = %q(gnuplot -e 'plot_file="%s"' -e 'plot_title="%s"' %s 2>&1)
 
     ##
     # @param [String] script The name of the gnuplot script to run.
@@ -73,15 +73,17 @@ module OpenerBenchmark
       input_file  = File.join(GNUPLOT_SCRIPTS, script)
       output_file = File.join(PLOTS_DIRECTORY, filename)
 
-      command = GNUPLOT_COMMAND % [handle.path, title, input_file, output_file]
+      command = GNUPLOT_COMMAND % [handle.path, title, input_file]
       output  = `#{command}`
 
       handle.close(true)
 
-      if $?.success?
-        return true
-      else
+      unless $?.success?
         raise "Failed to generate the plot: #{output.strip}"
+      end
+
+      File.open(output_file, 'wb') do |handle|
+        handle.write(output)
       end
     end
   end # Plot

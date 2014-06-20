@@ -6,18 +6,18 @@ module OpenerBenchmark
     plugin :timestamps, :created => :created_at
 
     ##
-    # Calculates the average iteration times per benchmark of a specified
-    # group.
+    # Calculates the average iteration time for a benchmark group and groups
+    # the results per name, word amount and language.
     #
     # @param [String] group
     # @return [Enumerable]
     #
     def self.group_iteration_times(group)
-      return select(:name, :words)
+      return select(:name, :words, :language)
         .select_append { avg(:iteration_time).as(:avg) }
         .where(:group => group)
-        .group(:name, :words)
-        .order(Sequel.asc(:avg))
+        .group(:name, :words, :language)
+        .order(Sequel.asc(:language), Sequel.asc(:words))
     end
 
     ##
