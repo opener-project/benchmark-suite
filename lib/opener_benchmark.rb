@@ -3,6 +3,7 @@ require 'tempfile'
 require 'terminal-table'
 
 require 'opener/language_identifier'
+require 'opener/tokenizer'
 
 require_relative 'opener_benchmark/opener_benchmark'
 require_relative 'opener_benchmark/cpu'

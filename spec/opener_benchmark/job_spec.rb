@@ -2,13 +2,17 @@ require 'spec_helper'
 
 describe OpenerBenchmark::Job do
   before do
-    @job     = described_class.new('rspec', proc {})
+    @job     = described_class.new('rspec', proc {}, :foo => 10)
     @context = OpenerBenchmark::Context.new
   end
 
   context '#initialize' do
     example 'set the job name' do
       @job.name.should == 'rspec'
+    end
+
+    example 'set the extra metadata' do
+      @job.metadata.should == {:foo => 10}
     end
   end
 

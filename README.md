@@ -61,7 +61,7 @@ OpenerBenchmark.benchmark 'benchmark-name' do
 
   end
 
-  bench :name do
+  bench 'name' do
 
   end
 end
@@ -80,9 +80,9 @@ The `setup do ... end` block can be used to set up variables before any of the
 benchmarks are executed. This block is only called once similar to RSpec's
 `before(:all)` block.
 
-The `bench :name do ... end` block is a single benchmark that will be executed.
-The block's body should only contain benchmarking code, not any setup related
-code.
+The `bench 'name' do ... end` block is a single benchmark that will be
+executed.  The block's body should only contain benchmarking code, not any
+setup related code.
 
 The block is executed many times depending on how many iterations fit in the
 specified runtime (5 seconds by default). Before it is measured a warmup is
@@ -92,40 +92,11 @@ time as following:
     set :runtime, 10 # run for 10 seconds
     set :warmup, 5   # warm up for 5 seconds
 
-If a benchmark name matches the name of an instance variable defined in the
-`setup` block then said variable is used for adding extra metadata to the
-database record. Currently the following metadata is added:
+You can also add extra job specific metadata as following:
 
-* Byte size
-* Character amount
-* Encoding name
-* Word size
+    bench 'some benchmark', :words => 10 do
 
-As an example, take the following benchmark:
-
-```ruby
-OpenerBenchmark.benchmark 'example' do
-  set :version, '1.0'
-  set :language, 'english'
-
-  setup do
-    @something = SomeOpenerClass.new
-    @very_small_review = 'It was simply amazing!'
-  end
-
-  bench :very_small_review do
-    @something.run(@very_small_review)
-  end
-end
-```
-
-Here the name of the benchmark is `:very_small_review` which has the same name
-as the instance variable `@very_small_review` (the `@` is ignored in this
-case). As a result extra metadata will be added based on the value of
-`@very_small_review`.
-
-If the benchmark name does *not* match a variable then said metadata is not
-added. The benchmark however will still run just fine.
+    end
 
 ## Generating Reports
 

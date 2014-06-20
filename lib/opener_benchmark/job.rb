@@ -6,17 +6,22 @@ module OpenerBenchmark
   # @!attribute [r] name
   #  @return [String]
   #
+  # @!attribute [r] metadata
+  #  @return [Hash]
+  #
   class Job
-    attr_reader :name
+    attr_reader :name, :metadata
 
     ##
     # @param [String|Symbol] name
     # @param [Proc] block
+    # @param [Hash] metadata
     #
-    def initialize(name, block)
-      @name   = name.to_s
-      @block  = block
-      @memory = Memory.new
+    def initialize(name, block, metadata = {})
+      @name     = name.to_s
+      @block    = block
+      @memory   = Memory.new
+      @metadata = metadata
     end
 
     ##

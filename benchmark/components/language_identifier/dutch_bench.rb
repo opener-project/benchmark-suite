@@ -12,15 +12,15 @@ OpenerBenchmark.benchmark 'language-identifier' do
     @large_review  = read_fixture('dutch/large.txt')
   end
 
-  bench :small_review do
+  bench 'small review', :words => 30 do
     @identifier.run(@small_review)
   end
 
-  bench :medium_review do
+  bench 'medium review', :words => 50 do
     @identifier.run(@medium_review)
   end
 
-  bench :large_review do
+  bench 'large review', :words => 130 do
     @identifier.run(@large_review)
   end
 end

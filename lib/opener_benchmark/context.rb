@@ -5,14 +5,5 @@ module OpenerBenchmark
   # pollute instances of {OpenerBenchmark::BenchmarkGroup}.
   #
   class Context
-    ##
-    # Returns the value of an instance variable that matches the given job
-    # name.
-    #
-    # @param [String|Symbo] name
-    #
-    def variable_for_job(name)
-      return instance_variable_get("@#{name}")
-    end
   end # Context
 end # OpenerBenchmark

@@ -36,8 +36,7 @@ module OpenerBenchmark
       context.instance_eval(&@setup) if @setup
 
       @benchmarks.each do |job|
-        timing  = job.measure(context, metadata[:warmup], metadata[:runtime])
-        job_var = context.variable_for_job(job.name)
+        timing = job.measure(context, metadata[:warmup], metadata[:runtime])
 
         display_job(job, timing)
 
@@ -50,14 +49,7 @@ module OpenerBenchmark
           :rss_after             => timing.rss_after
         )
 
-        # If we have a job variable we'll add extra metadata such as the
-        # encoding, word size, etc.
-        if job_var
-          row[:encoding]   = job_var.encoding.to_s
-          row[:words]      = job_var.split(/\s+/).length
-          row[:bytes]      = job_var.bytesize
-          row[:characters] = job_var.length
-        end
+        row = row.merge(job.metadata)
 
         Benchmark.create(row)
       end
@@ -77,9 +69,10 @@ module OpenerBenchmark
     # Adds a new report to the benchmark.
     #
     # @param [String|Symbol] name The name of the report.
+    # @param [Hash] metadata Job specific metadata.
     #
-    def bench(name, &block)
-      @benchmarks << Job.new(name, block)
+    def bench(name, metadata = {}, &block)
+      @benchmarks << Job.new(name, block, metadata)
     end
 
     ##
