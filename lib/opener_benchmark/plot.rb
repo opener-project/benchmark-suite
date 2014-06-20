@@ -53,7 +53,7 @@ module OpenerBenchmark
     # @return [String]
     #
     def label_for(row)
-      return row[:name].gsub('_', ' ') + "\\n#{row[:words]} words"
+      return "#{row[:name]}\\n#{row[:words]} words"
     end
 
     ##
