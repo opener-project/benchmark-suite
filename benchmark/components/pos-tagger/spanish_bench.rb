@@ -13,7 +13,7 @@ OpenerBenchmark.benchmark 'pos-tagger' do
       identifier.run(read_fixture('spanish/small.txt'))
     )
 
-    @medium_review = tokeniozer.run(
+    @medium_review = tokenizer.run(
       identifier.run(read_fixture('spanish/medium.txt'))
     )
 
