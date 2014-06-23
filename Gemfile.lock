@@ -25,18 +25,22 @@ GEM
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     nokogiri (1.6.2.1-java)
-    opener-constituent-parser (1.1.1)
+    opener-constituent-parser (1.2.0)
       httpclient
       nokogiri
       opener-constituent-parser-base (>= 0.1.0)
-      opener-constituent-parser-nl
+      opener-constituent-parser-de (~> 1.1)
+      opener-constituent-parser-nl (~> 1.0)
       opener-core (~> 1.0)
       opener-daemons
       opener-webservice
       puma
       sinatra (~> 1.4.2)
     opener-constituent-parser-base (1.0.5)
-    opener-constituent-parser-nl (0.1.1)
+    opener-constituent-parser-de (1.1.0)
+      cliver
+      rake
+    opener-constituent-parser-nl (1.0.0)
       cliver
       nokogiri
       rake
@@ -65,17 +69,27 @@ GEM
       puma
       rake
       sinatra
-    opener-pos-tagger (2.1.8)
+    opener-polarity-tagger (2.4.2)
+      cliver
       httpclient
       nokogiri
       opener-core (~> 1.0)
       opener-daemons
-      opener-pos-tagger-base
+      opener-webservice
+      puma
+      rake
+      sinatra
+    opener-pos-tagger (2.2.0)
+      httpclient
+      nokogiri
+      opener-core (~> 1.0)
+      opener-daemons
+      opener-pos-tagger-base (~> 2.0, >= 2.1.0)
       opener-pos-tagger-en-es (~> 2.0, >= 2.0.2)
       opener-webservice
       puma
       sinatra (~> 1.4.2)
-    opener-pos-tagger-base (2.0.1)
+    opener-pos-tagger-base (2.1.0)
       cliver
       rake
     opener-pos-tagger-en-es (2.0.2)
@@ -140,10 +154,11 @@ PLATFORMS
 
 DEPENDENCIES
   jdbc-sqlite3
-  opener-constituent-parser (~> 1.0)
+  opener-constituent-parser (~> 1.2)
   opener-language-identifier (~> 3.0)
   opener-opinion-detector-basic (~> 1.0.8)
-  opener-pos-tagger (~> 2.0)
+  opener-polarity-tagger (~> 2.0)
+  opener-pos-tagger (~> 2.2)
   opener-tokenizer (~> 1.0)
   opener-tree-tagger (~> 3.0)
   rake
