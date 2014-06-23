@@ -29,7 +29,7 @@ module OpenerBenchmark
     # Runs the benchmarks.
     #
     def run
-      context = Context.new
+      context = Context.new(metadata)
 
       display_header
 
@@ -83,6 +83,19 @@ module OpenerBenchmark
     #
     def set(key, value)
       @metadata[key] = value
+    end
+
+    ##
+    # Includes a shared benchmark into the current group.
+    #
+    # @param [Symbol] name
+    #
+    def include_shared_benchmark(name)
+      unless OpenerBenchmark.shared_benchmarks[name]
+        raise ArgumentError, "The shared benchmark #{name} does not exist"
+      end
+
+      instance_eval(&OpenerBenchmark.shared_benchmarks[name])
     end
 
     ##
