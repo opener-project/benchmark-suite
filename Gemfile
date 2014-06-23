@@ -7,8 +7,8 @@ gem 'terminal-table'
 
 gem 'opener-language-identifier', '~> 3.0'
 gem 'opener-tokenizer', '~> 1.0'
-gem 'opener-pos-tagger', '~> 2.0'
-gem 'opener-constituent-parser', '~> 1.0'
+gem 'opener-pos-tagger', '~> 2.2'
+gem 'opener-constituent-parser', '~> 1.2'
 gem 'opener-tree-tagger', '~> 3.0'
 gem 'opener-polarity-tagger', '~> 2.0'
 
