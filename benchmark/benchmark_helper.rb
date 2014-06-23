@@ -41,3 +41,16 @@ def prepare_kaf(name, class_names = [:LanguageIdentifier, :Tokenizer])
 
   return output
 end
+
+##
+# Checks if the given environment variables are set and raises if this is not
+# the case.
+#
+# @param [Array] vars
+# @raise [RuntimeError] Raised if one of the variables is not set.
+#
+def require_env_vars!(vars)
+  vars.each do |var|
+    abort "The environment variable #{var} must be set" unless ENV[var]
+  end
+end

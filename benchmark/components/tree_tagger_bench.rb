@@ -4,7 +4,7 @@ OpenerBenchmark.benchmark_languages 'tree-tagger' do
   set :version, Opener::TreeTagger::VERSION
 
   setup do
-    abort 'TREE_TAGGER_PATH should be set' unless ENV['TREE_TAGGER_PATH']
+    require_env_vars!(%w{TREE_TAGGER_PATH})
 
     @component     = Opener::TreeTagger.new
     @small_review  = prepare_kaf(:small)

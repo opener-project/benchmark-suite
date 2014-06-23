@@ -4,9 +4,7 @@ OpenerBenchmark.benchmark_languages 'polarity-tagger' do
   set :version, Opener::PolarityTagger::VERSION
 
   setup do
-    unless ENV['POLARITY_LEXICON_PATH']
-      abort 'POLARITY_LEXICON_PATH should be set'
-    end
+    require_env_vars!(%w{POLARITY_LEXICON_PATH})
 
     steps = [:LanguageIdentifier, :Tokenizer, :POSTagger]
 

@@ -93,6 +93,16 @@ GEM
       cliver
       rake
     opener-pos-tagger-en-es (2.0.2)
+    opener-property-tagger (2.2.9)
+      cliver
+      httpclient
+      nokogiri
+      opener-core (~> 1.0.2)
+      opener-daemons
+      opener-webservice
+      puma
+      rake
+      sinatra
     opener-tokenizer (1.1.2)
       httpclient
       nokogiri
@@ -159,6 +169,7 @@ DEPENDENCIES
   opener-opinion-detector-basic (~> 1.0.8)
   opener-polarity-tagger (~> 2.0)
   opener-pos-tagger (~> 2.2)
+  opener-property-tagger (~> 2.2)
   opener-tokenizer (~> 1.0)
   opener-tree-tagger (~> 3.0)
   rake
