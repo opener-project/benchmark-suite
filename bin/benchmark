@@ -20,7 +20,7 @@ parser = Slop.new do
     :default => 1
 
   run do |opts, args|
-    if args.empty?
+    if args.empty? or File.directory?(args[0])
       args = Dir.glob(File.join(opts[:path], '**/*_bench.rb'))
     end
 
