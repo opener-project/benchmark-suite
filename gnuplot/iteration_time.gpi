@@ -26,7 +26,7 @@ set title plot_title
 set ylabel "Time (seconds)"
 set xtics center
 
-set term svg enhanced size 800,600
+set term svg enhanced size 1200,600
 set grid
 set yrange [0:*]
 set bmargin 5
