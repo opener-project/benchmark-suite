@@ -48,9 +48,8 @@ For the various Linux flavours you can use the following:
 
 ## Writing Benchmarks
 
-Benchmarks are located in the `benchmark/` directory. Each Ruby file contains a
-set of benchmarks for a single component and language. Benchmarks are created
-as following:
+Benchmarks are located in the `benchmark/` directory. In its most basic form a
+benchmark looks like the following:
 
 ```ruby
 OpenerBenchmark.benchmark 'benchmark-name' do
@@ -97,6 +96,50 @@ You can also add extra job specific metadata as following:
     bench 'some benchmark', :words => 10 do
 
     end
+
+Because writing the above for every component and language can be a bit of a
+pain there are some helper methods/DSLs that make it easier to write benchmarks
+for multiple languages. The first step is to use `benchmark_languages` instead
+of `benchmark`:
+
+```ruby
+OpenerBenchmark.benchmark_languages 'benchmark-name' do
+
+end
+```
+
+Make sure you don't use `set :language, ...` as this will be done
+automatically for every language.
+
+If you want to benchmark a component using different word sizes you can use the
+shared benchmark group `word_sizes`:
+
+```ruby
+OpenerBenchmark.benchmark_languages 'benchmark-name' do
+  include_shared_benchmark :word_sizes
+end
+```
+
+A full example (as taken from the tokenizer) is as following:
+
+```ruby
+require 'benchmark_helper'
+
+OpenerBenchmark.benchmark_languages 'tokenizer' do
+  set :version, Opener::LanguageIdentifier::VERSION
+
+  setup do
+    steps = [:LanguageIdentifier]
+
+    @component     = Opener::Tokenizer.new(:kaf => true)
+    @small_review  = prepare_kaf(:small, steps)
+    @medium_review = prepare_kaf(:medium, steps)
+    @large_review  = prepare_kaf(:large, steps)
+  end
+
+  include_shared_benchmark :word_sizes
+end
+```
 
 ## Generating Reports
 
