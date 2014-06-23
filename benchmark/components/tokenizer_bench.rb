@@ -1,7 +1,7 @@
 require 'benchmark_helper'
 
 OpenerBenchmark.benchmark_languages 'tokenizer' do
-  set :version, Opener::LanguageIdentifier::VERSION
+  set :version, Opener::Tokenizer::VERSION
 
   setup do
     steps = [:LanguageIdentifier]
