@@ -1,6 +1,6 @@
 require 'benchmark_helper'
 
-OpenerBenchmark.benchmark_languages 'pos-tagger' do
+OpenerBenchmark.benchmark_languages 'polarity-tagger' do
   set :version, Opener::PolarityTagger::VERSION
 
   setup do
