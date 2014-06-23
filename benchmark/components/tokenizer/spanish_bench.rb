@@ -24,4 +24,4 @@ OpenerBenchmark.benchmark 'tokenizer' do
   bench 'large review', :words => 130 do
     @tokenizer.run(@large_review)
   end
-spa
+end
