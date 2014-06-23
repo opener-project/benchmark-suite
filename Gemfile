@@ -7,6 +7,7 @@ gem 'terminal-table'
 
 gem 'opener-language-identifier', '~> 3.0'
 gem 'opener-tokenizer', '~> 1.0'
+gem 'opener-pos-tagger', '~> 2.0'
 
 group :development do
   gem 'rspec'
