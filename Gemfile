@@ -13,6 +13,7 @@ gem 'opener-tree-tagger', '~> 3.0'
 gem 'opener-polarity-tagger', '~> 2.0'
 gem 'opener-property-tagger', '~> 2.2'
 gem 'opener-opinion-detector-basic', '~> 1.0'
+gem 'opener-opinion-detector', '~> 1.2'
 
 group :development do
   gem 'rspec'

@@ -7,6 +7,7 @@ require 'opener/tokenizer'
 require 'opener/pos_tagger'
 require 'opener/tree_tagger'
 require 'opener/opinion_detector_basic'
+require 'opener/opinion_detector'
 require 'opener/polarity_tagger'
 require 'opener/property_tagger'
 
