@@ -47,16 +47,6 @@ module OpenerBenchmark
     end
 
     ##
-    # Generates a label for the given benchmark object.
-    #
-    # @param [OpenerBenchmark::Benchmark] row
-    # @return [String]
-    #
-    def label_for(row)
-      return "#{row[:name]}\\n#{row[:words]} words"
-    end
-
-    ##
     # @param [Array] rows The rows of data to plot.
     # @raise [RuntimeError] Raised when gnuplot could not create the plot.
     #
