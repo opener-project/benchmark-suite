@@ -14,6 +14,7 @@ gem 'opener-polarity-tagger', '~> 2.0'
 gem 'opener-property-tagger', '~> 2.2'
 gem 'opener-opinion-detector-basic', '~> 1.0'
 gem 'opener-opinion-detector', '~> 1.2'
+gem 'opener-ner', '~> 2.0'
 
 group :development do
   gem 'rspec'
