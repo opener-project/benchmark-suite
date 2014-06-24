@@ -54,6 +54,14 @@ GEM
       puma
       sinatra (~> 1.4.2)
       uuidtools
+    opener-ned (2.4.0)
+      httpclient
+      nokogiri
+      opener-core (~> 1.0)
+      opener-daemons
+      opener-webservice
+      puma
+      sinatra (~> 1.4)
     opener-ner (2.0.7)
       httpclient
       nokogiri
@@ -182,6 +190,7 @@ DEPENDENCIES
   jdbc-sqlite3
   opener-constituent-parser (~> 1.2)
   opener-language-identifier (~> 3.0)
+  opener-ned (~> 2.4)
   opener-ner (~> 2.0, >= 2.0.7)
   opener-opinion-detector (~> 1.2)
   opener-opinion-detector-basic (~> 1.0)
