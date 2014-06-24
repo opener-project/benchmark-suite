@@ -20,10 +20,10 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     nokogiri (1.6.2.1-java)
-    opener-constituent-parser (1.2.0)
+    opener-constituent-parser (1.2.1)
       httpclient
       nokogiri
-      opener-constituent-parser-base (>= 0.1.0)
+      opener-constituent-parser-base (~> 1.0, >= 1.0.6)
       opener-constituent-parser-de (~> 1.1)
       opener-constituent-parser-nl (~> 1.0)
       opener-core (~> 1.0)
@@ -31,8 +31,8 @@ GEM
       opener-webservice
       puma
       sinatra (~> 1.4.2)
-    opener-constituent-parser-base (1.0.5)
-    opener-constituent-parser-de (1.1.0)
+    opener-constituent-parser-base (1.0.6)
+    opener-constituent-parser-de (1.1.1)
       cliver
       rake
     opener-constituent-parser-nl (1.0.0)
@@ -188,7 +188,7 @@ PLATFORMS
 
 DEPENDENCIES
   jdbc-sqlite3
-  opener-constituent-parser (~> 1.2)
+  opener-constituent-parser (~> 1.2, >= 1.2.1)
   opener-language-identifier (~> 3.0)
   opener-ned (~> 2.4)
   opener-ner (~> 2.0, >= 2.0.7)
