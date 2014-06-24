@@ -11,6 +11,7 @@ require 'opener/opinion_detector'
 require 'opener/polarity_tagger'
 require 'opener/property_tagger'
 require 'opener/constituent_parser'
+require 'opener/ner'
 
 require_relative 'opener_benchmark/opener_benchmark'
 require_relative 'opener_benchmark/cpu'
