@@ -4,6 +4,8 @@ OpenerBenchmark.benchmark_languages 'constituent-parser' do
   set :version, Opener::ConstituentParser::VERSION
 
   setup do
+    require_env_vars!(%w{POLARITY_LEXICON_PATH PROPERTY_TAGGER_LEXICONS_PATH ALPINO_HOME})
+    
     steps = [:LanguageIdentifier, :Tokenizer, :POSTagger, :PolarityTagger, :PropertyTagger, :Ner]
 
     @component     = Opener::ConstituentParser.new
