@@ -17,6 +17,7 @@ gem 'opener-opinion-detector', '~> 1.2'
 gem 'opener-constituent-parser', '~> 1.2'
 gem 'opener-ner', ['~> 2.0', '>= 2.0.7']
 gem 'opener-ned', '~> 2.4'
+gem 'opener-coreference', '~> 1.1'
 
 group :development do
   gem 'rspec'
