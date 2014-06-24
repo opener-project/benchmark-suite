@@ -4,9 +4,17 @@ OpenerBenchmark.benchmark_languages 'coreference' do
   set :version, Opener::Coreference::VERSION
 
   setup do
-    require_env_vars!(%w{POLARITY_LEXICON_PATH PROPERTY_TAGGER_LEXICONS_PATH ALPINO_HOME})
+    require_env_vars!(%w{POLARITY_LEXICON_PATH PROPERTY_TAGGER_LEXICONS_PATH})
 
-    steps = [:LanguageIdentifier, :Tokenizer, :POSTagger, :PolarityTagger, :PropertyTagger, :Ner, :Ned]
+    steps = [
+      :LanguageIdentifier,
+      :Tokenizer,
+      :POSTagger,
+      :PolarityTagger,
+      :PropertyTagger,
+      :Ner,
+      :Ned
+    ]
 
     @component     = Opener::Coreference.new
     @small_review  = prepare_kaf(:small, steps)
