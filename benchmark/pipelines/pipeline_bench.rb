@@ -15,7 +15,6 @@ OpenerBenchmark.benchmark_languages 'pipeline' do
       :PolarityTagger,
       :PropertyTagger,
       :Ner,
-      :Ned,
       :Coreference,
       :ConstituentParser,
       :OpinionDetector
