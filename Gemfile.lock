@@ -20,7 +20,7 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     nokogiri (1.6.2.1-java)
-    opener-constituent-parser (1.2.1)
+    opener-constituent-parser (1.2.3)
       httpclient
       nokogiri
       opener-constituent-parser-base (~> 1.0, >= 1.0.6)
@@ -32,7 +32,7 @@ GEM
       puma
       sinatra (~> 1.4.2)
     opener-constituent-parser-base (1.0.6)
-    opener-constituent-parser-de (1.1.1)
+    opener-constituent-parser-de (1.1.2)
       cliver
       rake
     opener-constituent-parser-nl (1.0.0)
@@ -95,7 +95,7 @@ GEM
       opener-webservice
       puma
       sinatra (~> 1.4.2)
-    opener-opinion-detector-base (2.2.0)
+    opener-opinion-detector-base (2.2.1)
       cliver
       nokogiri
       rake
