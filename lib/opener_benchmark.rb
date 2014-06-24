@@ -10,6 +10,7 @@ require 'opener/opinion_detector_basic'
 require 'opener/opinion_detector'
 require 'opener/polarity_tagger'
 require 'opener/property_tagger'
+require 'opener/constituent_parser'
 require 'opener/ner'
 require 'opener/ned'
 
