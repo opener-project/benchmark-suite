@@ -7,7 +7,7 @@ module OpenerBenchmark
 
     ##
     # Returns a base query used to group rows together per benchmark group,
-    # name, words, etc.
+    # name, etc.
     #
     # @return [Mixed]
     #
@@ -15,37 +15,34 @@ module OpenerBenchmark
       return select(
         :group,
         :name,
-        :words,
         :language,
         :jruby_version,
         :cpu_name
       ).group(
         :group,
         :name,
-        :words,
         :language,
         :jruby_version,
         :cpu_name
       ).order(
         Sequel.asc(:group),
-        Sequel.asc(:language),
-        Sequel.asc(:words)
+        Sequel.asc(:language)
       )
     end
 
     ##
     # Calculates the average iteration time for a benchmark group and groups
-    # the results per name, word amount and language.
+    # the results per name and language.
     #
     # @param [String] group
     # @return [Enumerable]
     #
     def self.group_iteration_times(group)
-      return select(:name, :words, :language)
+      return select(:name, :language)
         .select_append { avg(:iteration_time).as(:avg) }
         .where(:group => group)
-        .group(:name, :words, :language)
-        .order(Sequel.asc(:language), Sequel.asc(:words))
+        .group(:name, :language)
+        .order(Sequel.asc(:language))
     end
 
     ##
@@ -66,17 +63,6 @@ module OpenerBenchmark
     def self.grouped_iterations_per_second
       return grouped_base_query
         .select_append { round(avg(:iterations_per_second), 3).as(:avg) }
-    end
-
-    ##
-    # Calculates the average amount of words processed per second for all
-    # benchmarks.
-    #
-    # @return [Enumerable]
-    #
-    def self.grouped_words_per_second
-      return grouped_base_query
-        .select_append { round(avg(words / iteration_time), 3).as(:avg) }
     end
 
     ##

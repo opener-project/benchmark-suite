@@ -3,14 +3,13 @@ namespace :report do
   task :iteration_time => :environment do
     rows  = OpenerBenchmark::Benchmark.grouped_iteration_times
     table = Terminal::Table.new do |t|
-      t.headings = %w{Group Name Language Words JRuby CPU Time}
+      t.headings = %w{Group Name Language JRuby CPU Time}
 
       rows.each_with_index do |row, index|
         t << [
           row[:group],
           row[:name],
           row[:language],
-          row[:words],
           row[:jruby_version],
           row[:cpu_name],
           row[:avg]
@@ -25,29 +24,7 @@ namespace :report do
   task :iterations_per_second => :environment do
     rows  = OpenerBenchmark::Benchmark.grouped_iterations_per_second
     table = Terminal::Table.new do |t|
-      t.headings = %w{Group Name Language Words JRuby CPU Iterations}
-
-      rows.each do |row|
-        t << [
-          row[:group],
-          row[:name],
-          row[:language],
-          row[:words],
-          row[:jruby_version],
-          row[:cpu_name],
-          row[:avg]
-        ]
-      end
-    end
-
-    puts table
-  end
-
-  desc 'Reports the amount of words processed per second'
-  task :words_per_second => :environment do
-    rows  = OpenerBenchmark::Benchmark.grouped_words_per_second
-    table = Terminal::Table.new do |t|
-      t.headings = %w{Group Name Language JRuby CPU Rate}
+      t.headings = %w{Group Name Language JRuby CPU Iterations}
 
       rows.each do |row|
         t << [
