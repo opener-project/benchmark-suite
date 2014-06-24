@@ -13,6 +13,7 @@ require 'opener/property_tagger'
 require 'opener/constituent_parser'
 require 'opener/ner'
 require 'opener/ned'
+require 'opener/coreference'
 
 require_relative 'opener_benchmark/opener_benchmark'
 require_relative 'opener_benchmark/cpu'
