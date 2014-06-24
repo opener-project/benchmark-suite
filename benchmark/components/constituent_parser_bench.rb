@@ -12,7 +12,8 @@ OpenerBenchmark.benchmark_languages 'constituent-parser' do
       :POSTagger,
       :PolarityTagger,
       :PropertyTagger,
-      :Ner
+      :Ner,
+      :Coreference
     ]
 
     @component     = Opener::ConstituentParser.new
