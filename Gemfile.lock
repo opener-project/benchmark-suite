@@ -68,7 +68,7 @@ GEM
       puma
       sinatra (~> 1.4.2)
       uuidtools
-    opener-ned (2.4.0)
+    opener-ned (2.4.1)
       httpclient
       nokogiri
       opener-core (~> 1.0)
@@ -99,7 +99,7 @@ GEM
       cliver
       nokogiri
       rake
-    opener-opinion-detector-basic (1.0.8)
+    opener-opinion-detector-basic (1.1.0)
       cliver
       httpclient
       nokogiri
@@ -133,7 +133,7 @@ GEM
       cliver
       rake
     opener-pos-tagger-en-es (2.0.2)
-    opener-property-tagger (2.2.9)
+    opener-property-tagger (2.3.0)
       cliver
       httpclient
       nokogiri
@@ -153,7 +153,7 @@ GEM
       puma
       sinatra (~> 1.4.2)
     opener-tokenizer-base (1.0.0)
-    opener-tree-tagger (3.2.7)
+    opener-tree-tagger (3.3.0)
       cliver
       httpclient
       nokogiri
