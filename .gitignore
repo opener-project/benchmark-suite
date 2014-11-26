@@ -2,3 +2,4 @@ db/database.db
 plots/*
 
 !.gitkeep
+Gemfile.lock
