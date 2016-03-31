@@ -152,7 +152,7 @@ module OpenerBenchmark
         :ruby_engine   => RUBY_ENGINE,
         :ruby_platform => RUBY_PLATFORM,
         :ruby_version  => RUBY_VERSION,
-        :jruby_version => JRUBY_VERSION,
+        :jruby_version => (JRUBY_VERSION if defined? JRUBY_VERSION),
         :cpu_name      => @cpu.name,
         :warmup        => 2,
         :runtime       => 5

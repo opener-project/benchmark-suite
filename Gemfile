@@ -1,9 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'sequel'
-gem 'jdbc-sqlite3'
-gem 'slop'
+gem 'slop', '~> 3.5'
 gem 'terminal-table'
+
+platform :ruby do
+  gem 'sqlite3'
+end
+platform :jruby do
+  gem 'jdbc-sqlite3'
+end
 
 gem 'opener-language-identifier', '~> 3.0'
 gem 'opener-tokenizer', '~> 1.0'
