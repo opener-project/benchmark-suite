@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'sequel'
 gem 'slop', '~> 3.5'
 gem 'terminal-table'
+gem 'pry'
 
 platform :ruby do
   gem 'sqlite3'
