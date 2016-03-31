@@ -1,5 +1,6 @@
 db/database.db
 plots/*
+benchmark/tmp
 
 !.gitkeep
 Gemfile.lock

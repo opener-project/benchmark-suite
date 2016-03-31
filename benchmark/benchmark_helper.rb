@@ -2,6 +2,16 @@ require_relative '../config/application'
 require_relative 'support/shared_benchmarks'
 
 ##
+# Return the full fixture filename
+#
+# @param [String|Symbol] name The fixture name.
+#
+def fixture_path(name)
+  File.join File.expand_path('../fixtures', __FILE__),
+    metadata[:language], "#{name}.txt"
+end
+
+##
 # Reads a fixture file of the given name and the current language.
 #
 # @example
@@ -14,11 +24,7 @@ require_relative 'support/shared_benchmarks'
 # @param [String|Symbol] name The fixture name.
 #
 def fixture(name)
-  directory = File.expand_path('../fixtures', __FILE__)
-  path      = File.join(metadata[:language], "#{name}.txt")
-  full_path = File.join(directory, path)
-
-  return File.read(full_path)
+  return File.read fixture_path(name)
 end
 
 ##
@@ -40,6 +46,29 @@ def prepare_kaf(name, class_names = [:LanguageIdentifier, :Tokenizer])
   end
 
   return output
+end
+
+##
+# Load cached version of kaf if available
+#
+# @example
+#  cached_kaf :small, [:LanguageIdentifier, :Tokenizer]
+#
+# @param [String] name The name of the fixture to use.
+# @param [Array] class_names
+# @return [String]
+#
+def cached_kaf name, class_names = [:LanguageIdentifier, :Tokenizer]
+  cached_path = File.join File.expand_path('../tmp', __FILE__),
+    "#{metadata[:language]}_#{name}_#{class_names.join('-')}.kaf"
+
+  if File.exists? cached_path
+    File.read cached_path
+  else
+    kaf = prepare_kaf name, class_names
+    File.write cached_path, kaf
+    kaf
+  end
 end
 
 ##
