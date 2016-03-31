@@ -8,10 +8,10 @@ OpenerBenchmark.benchmark_languages 'property-tagger' do
 
     steps = [:LanguageIdentifier, :Tokenizer, :POSTagger, :PolarityTagger]
 
+    @small_review  = cached_kaf :small, steps
+    @medium_review = cached_kaf :medium, steps
+    @large_review  = cached_kaf :large, steps
     @component     = Opener::PropertyTagger.new
-    @small_review  = prepare_kaf(:small, steps)
-    @medium_review = prepare_kaf(:medium, steps)
-    @large_review  = prepare_kaf(:large, steps)
   end
 
   include_shared_benchmark :word_sizes

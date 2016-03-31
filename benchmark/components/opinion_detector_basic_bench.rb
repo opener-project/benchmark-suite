@@ -14,10 +14,10 @@ OpenerBenchmark.benchmark_languages 'opinion-detector-basic' do
       :PropertyTagger
     ]
 
+    @small_review  = cached_kaf :small, steps
+    @medium_review = cached_kaf :medium, steps
+    @large_review  = cached_kaf :large, steps
     @component     = Opener::OpinionDetectorBasic.new
-    @small_review  = prepare_kaf(:small, steps)
-    @medium_review = prepare_kaf(:medium, steps)
-    @large_review  = prepare_kaf(:large, steps)
   end
 
   include_shared_benchmark :word_sizes
