@@ -33,7 +33,7 @@ Then set up the database:
 
 You can now run a benchmark:
 
-    ./bin/benchmark benchmark/components/language_identifier.rb
+    bundle exec ./bin/benchmark components/language_identifier_bench.rb
 
 For generating graphs you'll need to have [gnuplot](http://www.gnuplot.info/)
 installed. If you're on OS X you can install this as following:
